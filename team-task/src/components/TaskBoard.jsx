@@ -1,20 +1,46 @@
-import TaskItem from "./TaskItem";
-import { useState } from "react";
+import { useContext } from "react";
+import { TaskContext } from "../context/TaskContext";
+import TaskColumn from "./TaskColumn";
 
 
-function TaskBoard() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+function TaskBoard({projectId}) {
+  const { state } = useContext(TaskContext);
+ console.log("All tasks:", state.tasks);
+  const todoTasks = state.tasks.filter(
+  (task) => task.projectId === projectId && task.status === "todo"
+    );
 
-  return(<>
-  <button
-        onClick={() => setIsModalOpen(true)}
-        className="mb-4 px-3 py-1 bg-blue-500 text-white rounded"
-      >
-        New Task
-      </button>
-      < TaskItem 
-       isModalOpen={isModalOpen}
-       setIsModalOpen={setIsModalOpen} />
+  const inProgressTasks = state.tasks.filter(
+  (task) => task.projectId === projectId && task.status === "inprogress"
+    );
+
+  const completedTasks = state.tasks.filter(
+  (task) => task.projectId === projectId && task.status === "completed"
+    );
+
+  return(<>  
+    <div className="flex gap-4">
+  <TaskColumn 
+  title="To Do" 
+  tasks={todoTasks} 
+  status="todo" 
+  projectId={projectId} 
+/>
+
+<TaskColumn 
+  title="In Progress" 
+  tasks={inProgressTasks} 
+  status="inprogress" 
+  projectId={projectId} 
+/>
+
+<TaskColumn 
+  title="Completed" 
+  tasks={completedTasks} 
+  status="completed" 
+  projectId={projectId} 
+/>
+    </div>
   </>);
 }
 

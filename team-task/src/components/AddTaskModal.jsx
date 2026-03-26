@@ -11,6 +11,7 @@ function AddTaskModal({isOpen, onClose, onAddTask}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title.trim() === "") return;
+    console.log("Modal submitted:", title, assignedUser, deadline);
 
     onAddTask(title, assignedUser, deadline);
     setTitle("");
@@ -51,15 +52,7 @@ function AddTaskModal({isOpen, onClose, onAddTask}) {
 
 export default AddTaskModal;
 
-/**Purpose:
 
-Form to create new tasks
-    </form>
-  </div>
-  );
-}
-
-export default AddTaskModal;
 
 /**Purpose:
 
