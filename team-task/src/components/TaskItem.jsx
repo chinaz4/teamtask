@@ -2,9 +2,21 @@
 import { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
 import { ACTIONS } from "../reducers/TaskReducer";
+import { useDraggable } from "@dnd-kit/core";
+
 
 function TaskItem({ task }) {
   const { dispatch } = useContext(TaskContext);
+
+   const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: task.id,
+  });
+
+  const style = {
+    transform: transform
+      ? `translate(${transform.x}px, ${transform.y}px)`
+      : undefined,
+  };
 
   const handleDeleteTask = (id) => {
     dispatch({ type: ACTIONS.DELETE_TASK, payload: { id } });
@@ -18,7 +30,11 @@ function TaskItem({ task }) {
   };
 
   return (
-    <div className="bg-white p-3 rounded shadow">
+    <div ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+      className="bg-white p-3 rounded shadow cursor-grab active:cursor-grabbing">
       <h1 className="text-base font-semibold text-blue-950">
         {task.title}
       </h1>

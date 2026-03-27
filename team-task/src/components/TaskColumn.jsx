@@ -3,14 +3,20 @@ import { TaskContext } from "../context/TaskContext";
 import { ACTIONS } from "../reducers/TaskReducer";
 import TaskItem from "./TaskItem";
 import AddTaskModal from "./AddTaskModal";
+import { useDroppable } from "@dnd-kit/core";
 
 function TaskColumn({ title, tasks, status, projectId }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { dispatch } = useContext(TaskContext);
 
+   const { setNodeRef, isOver } = useDroppable({
+    id: status, // 👈 VERY IMPORTANT
+  });
+
   const handleAddTask = (taskTitle, assignedName, deadline) => {
     if (!taskTitle.trim()) return;
-    console.log("Creating task in column:", status, projectId);
+    
+
     const newTask = {
       id: Date.now(),
       title: taskTitle,
@@ -24,7 +30,10 @@ function TaskColumn({ title, tasks, status, projectId }) {
   };
 
   return (
-    <div className="bg-gray-100 p-4 rounded w-80 min-h-75">
+    <div  ref={setNodeRef}
+      className={`p-4 rounded w-80 min-h-100 transition ${
+        isOver ? "bg-blue-100" : "bg-gray-100"
+      }`}>
       <h2 className="text-lg font-bold mb-3">{title}</h2>
 
       {/* Add button */}
