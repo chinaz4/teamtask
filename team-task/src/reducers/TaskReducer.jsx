@@ -22,6 +22,8 @@ const TaskReducer = (state, action) => {
       };
 
      case ACTIONS.DELETE_TASK:
+     console.log("Reducer got:", action.payload.id);
+     console.log("Tasks before:", state.tasks); 
       return {
     ...state,
     tasks: state.tasks.filter((task) => task.id !== action.payload.id),
@@ -49,6 +51,9 @@ const TaskReducer = (state, action) => {
     default:
       return state;
   }
+
+  
+  
 
 };
 

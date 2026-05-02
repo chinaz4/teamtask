@@ -27,10 +27,7 @@ function TaskBoard({projectId}) {
   console.log("OVER:", over);
 
   // ❌ If dropped outside any column
-   if (!over) {
-    console.log("Dropped outside a column ❌");
-    return;
-  }
+   if (!over) {return;}
 
   console.log("Dropped inside:", over.id);
 

@@ -18,7 +18,7 @@ function TaskColumn({ title, tasks, status, projectId }) {
     
 
     const newTask = {
-      id: Date.now(),
+      id: Date.now().toString(),
       title: taskTitle,
       AssignedName: assignedName,
       Date: deadline,
