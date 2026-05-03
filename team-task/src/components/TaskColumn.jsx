@@ -45,7 +45,7 @@ function TaskColumn({ title, tasks, status, projectId }) {
   return (
     <div
       ref={setNodeRef}
-      className={`w-80 min-h-100 md:w-full sm:w-full p-4 rounded-2xl transition-colors
+      className={`lg:w-80 min-h-100 md:w-full sm:w-full p-4 rounded-2xl transition-colors
         ${isOver ? "bg-green-300 border-green-400" : "bg-green-200 border-green-300"}
       `}
     >

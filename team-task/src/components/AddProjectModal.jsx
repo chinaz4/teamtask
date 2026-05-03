@@ -17,16 +17,16 @@ function AddProjectModal({ isOpen, onClose, onAddProject }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50">
-      <div className="bg-white p-6 rounded-xl w-80 shadow-lg">
+      <div className="bg-green-200 p-6 space-y-2.5 rounded-xl w-80 shadow-lg">
         <h2 className="text-xl font-semibold mb-4">New Project</h2>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
           <input
             type="text"
             placeholder="Enter project name"
             value={projectName}
             onChange={(e) => setProjectName(e.target.value)}
-            className="w-full p-2 border rounded mb-4"
+            className="bg-cyan-50 rounded-md p-2"
           />
 
           <div className="flex justify-end gap-2">
@@ -40,7 +40,7 @@ function AddProjectModal({ isOpen, onClose, onAddProject }) {
 
             <button
               type="submit"
-              className="px-3 py-1 bg-blue-500 text-white rounded"
+              className="px-3 py-1 bg-green-800 text-white rounded"
             >
               Add
             </button>

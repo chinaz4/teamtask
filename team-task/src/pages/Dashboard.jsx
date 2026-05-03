@@ -6,7 +6,7 @@ function Dashboard() {
     
     <div className="flex h-screen bg-[#F0FDF4]">
       {/* Left Sidebar */}
-      <div className="w-2/5 bg-green-50 flex flex-col ">
+      <div className="w-2/6 lg:w-1/4 bg-green-50 flex flex-col ">
         <ProjectList />
       </div>
 
