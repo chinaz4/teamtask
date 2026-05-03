@@ -30,13 +30,13 @@ const TaskReducer = (state, action) => {
       };
   
     case ACTIONS.UPDATE_TASK:
-      return {
+  return {
     ...state,
-    tasks: state.tasks.map((t) => t.id === action.payload.id
-        ? { ...t, ...action.payload.updates }
+    tasks: state.tasks.map((t) =>
+      t.id === action.payload.id ? { ...t, ...action.payload.updates }
         : t
-        ),
-     };
+    ),
+  };
 
     case ACTIONS.MOVE_TASK:
         return {

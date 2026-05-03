@@ -1,24 +1,52 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 
-function AddTaskModal({isOpen, onClose, onAddTask}) {
+function AddTaskModal({isOpen, onClose, onAddTask, editingTask}) {
   const [title, setTitle] = useState("");
   const [assignedUser, setAssignedUser] = useState("");
   const [deadline, setDeadline] = useState("");
+  const [tags, setTags] = useState([]);
 
-   if (!isOpen) return null;
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (title.trim() === "") return;
-    
-
-    onAddTask(title, assignedUser, deadline);
+  useEffect(() => {
+  if (editingTask) {
+    setTitle(editingTask.title || "");
+    setAssignedUser(editingTask.assignedUser || "");
+    setDeadline(editingTask.deadline || "");
+    setTags(editingTask.tags || []);
+  } else {
     setTitle("");
     setAssignedUser("");
     setDeadline("");
-    onClose()
-  }; 
+    setTags([]);
+  }
+}, [editingTask]);
+
+   if (!isOpen) return null;
+  const handleSubmit = (e) => {
+  e.preventDefault();
+  if (title.trim() === "") return;
+
+  const taskData = {
+    id: editingTask ? editingTask.id : undefined,
+    title,
+    assignedUser,
+    deadline,
+    tags,
+  };
+
+  onAddTask(taskData); // same function handles ADD + UPDATE
+
+  setTitle("");
+  setAssignedUser("");
+  setDeadline("");
+  setTags([]);
+  onClose();
+};
+
+  
+
+
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50">

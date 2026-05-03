@@ -7,27 +7,40 @@ import { useDroppable } from "@dnd-kit/core";
 
 function TaskColumn({ title, tasks, status, projectId }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingTask, setEditingTask] = useState(null);
   const { dispatch } = useContext(TaskContext);
 
    const { setNodeRef, isOver } = useDroppable({
-    id: status, // 👈 VERY IMPORTANT
+    id: status, //  VERY IMPORTANT
   });
 
-  const handleAddTask = (taskTitle, assignedName, deadline) => {
-    if (!taskTitle.trim()) return;
-    
-
-    const newTask = {
-      id: Date.now().toString(),
-      title: taskTitle,
-      AssignedName: assignedName,
-      Date: deadline,
-      status: status, // 👈 comes from column
-      projectId: projectId,
-    };
-
-    dispatch({ type: ACTIONS.ADD_TASK, payload: newTask });
+  const handleAddTask = (taskData) => {
+  const newTask = {
+    id: taskData.id || Date.now().toString(),
+    title: taskData.title,
+    assignedUser: taskData.assignedUser,
+    deadline: taskData.deadline,
+    status: status,
+    projectId: projectId,
   };
+
+  if (taskData.id) {
+    // UPDATE
+    dispatch({
+      type: ACTIONS.UPDATE_TASK,
+      payload: {
+        id: taskData.id,
+        updates: newTask,
+      },
+    });
+  } else {
+    // ADD
+    dispatch({ type: ACTIONS.ADD_TASK, payload: newTask });
+  }
+};
+  const handleEdit = (task) => {
+  setEditingTask(task);     
+  setIsModalOpen(true);    };
 
   return (
     <div  ref={setNodeRef}
@@ -48,7 +61,7 @@ function TaskColumn({ title, tasks, status, projectId }) {
       <div className="flex flex-col gap-3">
         {tasks.length > 0 ? (
           tasks.map((task) => (
-            <TaskItem key={task.id} task={task} />
+            <TaskItem key={task.id} task={task} onEdit={handleEdit} />
           ))
         ) : (
           <p className="text-sm text-gray-500">No tasks here</p>
@@ -58,8 +71,11 @@ function TaskColumn({ title, tasks, status, projectId }) {
       {/* Modal */}
       <AddTaskModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => { setIsModalOpen(false);
+          setEditingTask(null); // reset after closing
+        }}
         onAddTask={handleAddTask}
+        editingTask={editingTask}
       />
     </div>
   );

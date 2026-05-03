@@ -23,3 +23,27 @@ function App() {
 }
 
 export default App;
+
+/**
+ * 🟣 Phase 5: Core Features
+Add task creation form
+Implement editing & deleting
+Implement drag-and-drop
+🟤 Phase 6: Persistence
+Use useEffect to:
+Save to localStorage
+Load from localStorage
+⚫ Phase 7: Enhancements
+Add:
+Deadline highlighting
+Progress indicator
+Input focus using useRef
+🟢 Phase 8: Testing & Cleanup
+Test:
+Add/edit/delete tasks
+Dragging
+Page refresh
+Refactor code:
+Split large components
+Improve naming
+ */
