@@ -48,7 +48,7 @@ const progress = totalTasks === 0 ? 0 : (completedCount / totalTasks) * 100;
   
    <DndContext onDragEnd={handleDragEnd}>
 
-    <div className="flex gap-4">
+    <div className="flex gap-4 sm:flex-col md:flex-col sm:gap-3 md:gap-3 ">
   <TaskColumn 
   title="To Do" 
   tasks={todoTasks} 

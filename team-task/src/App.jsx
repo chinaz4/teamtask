@@ -7,9 +7,11 @@ import './App.css';
 function App() {
   return (
     <TaskProvider>
-      <h1 className='text-3xl font-mono text-center p-3 w-full bg-linear-to-r from-blue-500 to-purple-500 text-white'>
-        Team Task 
-      </h1>
+      <h1 className="text-3xl font-semibold text-[#14532D] text-center py-4 w-full 
+               bg-linear-to-r from-[#3bcc7c] via-[#f0fdf3] to-[#3bcc7c]
+               border-b border-[#DCFCE7] tracking-wide">
+  Team Task Flow  — Get Things Done 🚀
+</h1>
 
       <Router>
         <Routes>
@@ -24,26 +26,3 @@ function App() {
 
 export default App;
 
-/**
- * 🟣 Phase 5: Core Features
-Add task creation form
-Implement editing & deleting
-Implement drag-and-drop
-🟤 Phase 6: Persistence
-Use useEffect to:
-Save to localStorage
-Load from localStorage
-⚫ Phase 7: Enhancements
-Add:
-Deadline highlighting
-Progress indicator
-Input focus using useRef
-🟢 Phase 8: Testing & Cleanup
-Test:
-Add/edit/delete tasks
-Dragging
-Page refresh
-Refactor code:
-Split large components
-Improve naming
- */
