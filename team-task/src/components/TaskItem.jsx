@@ -30,6 +30,19 @@ function TaskItem({ task, onEdit }) {
     });
   };
 
+   
+  const getDeadlineStatus = (deadline) => {
+  const today = new Date();
+  const dueDate = new Date(deadline);
+
+  const diffTime = dueDate - today;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays < 0) return "overdue";
+  if (diffDays <= 2) return "urgent";
+  return "safe";
+};
+const status = getDeadlineStatus(task.deadline);
   return (
     <div ref={setNodeRef}
       style={style}     
@@ -57,7 +70,13 @@ function TaskItem({ task, onEdit }) {
       <div className="flex justify-between mt-2 items-center">
         <p className="text-sm">{task.assignedUser}</p>
 
-        <span className="bg-amber-300 px-2 py-1 text-xs">
+        <span className={
+          status === "overdue"
+            ? "text-red-600"
+            : status === "urgent"
+            ? "text-yellow-500"
+            : "text-green-600"
+        }>
           {task.deadline}
         </span>
 

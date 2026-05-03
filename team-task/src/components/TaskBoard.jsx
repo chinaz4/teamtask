@@ -20,13 +20,18 @@ function TaskBoard({projectId}) {
   (task) => task.projectId === projectId && task.status === "completed"
     );
 
+    const totalTasks = todoTasks.length + inProgressTasks.length + completedTasks.length;
+const completedCount = completedTasks.length;
+
+const progress = totalTasks === 0 ? 0 : (completedCount / totalTasks) * 100;
+
     const handleDragEnd = (event) => {
   const { active, over } = event;
 
   console.log("ACTIVE:", active);
   console.log("OVER:", over);
 
-  // ❌ If dropped outside any column
+  // If dropped outside any column
    if (!over) {return;}
 
   console.log("Dropped inside:", over.id);
@@ -40,7 +45,9 @@ function TaskBoard({projectId}) {
   }); }
 
   return(<>  
+  
    <DndContext onDragEnd={handleDragEnd}>
+
     <div className="flex gap-4">
   <TaskColumn 
   title="To Do" 
@@ -64,6 +71,18 @@ function TaskBoard({projectId}) {
 />
     </div>
     </DndContext>
+    <div className="w-full mb-4">
+  <div className="h-2 bg-gray-300 rounded">
+    <div
+      className="h-2 bg-green-500 rounded"
+      style={{ width: `${progress}%` }}
+    />
+  </div>
+
+  <p className="text-sm mt-1">
+    Progress: {Math.round(progress)}%
+  </p>
+</div>
   </>);
 }
 
