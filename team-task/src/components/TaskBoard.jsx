@@ -44,7 +44,7 @@ const progress = totalTasks === 0 ? 0 : (completedCount / totalTasks) * 100;
     payload: { id: taskId, newStatus },
   }); }
 
-  return(<>  
+  return(<div className="p-4 bg-green-50">  
   
    <DndContext onDragEnd={handleDragEnd}>
 
@@ -71,7 +71,7 @@ const progress = totalTasks === 0 ? 0 : (completedCount / totalTasks) * 100;
 />
     </div>
     </DndContext>
-    <div className="w-full mb-4">
+    <div className="w-full my-5">
   <div className="h-2 bg-gray-300 rounded">
     <div
       className="h-2 bg-green-500 rounded"
@@ -83,7 +83,7 @@ const progress = totalTasks === 0 ? 0 : (completedCount / totalTasks) * 100;
     Progress: {Math.round(progress)}%
   </p>
 </div>
-  </>);
+  </div>);
 }
 
 export default TaskBoard;

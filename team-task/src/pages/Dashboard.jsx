@@ -5,12 +5,12 @@ function Dashboard() {
   return (
     <div className="flex min-h-screen">
       {/* Left Sidebar */}
-      <div className="w-1/4 bg-gray-300 p-4">
+      <div className="w-2/5 bg-green-50">
         <ProjectList />
       </div>
 
       {/* Right Main Area */}
-      <div className="flex-1 bg-white p-4">
+      <div className="flex-1 bg-green-50">
         {/* Render the selected project details here */}
         <Outlet />
       </div>
